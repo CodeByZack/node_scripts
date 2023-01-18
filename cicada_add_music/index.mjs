@@ -23,9 +23,9 @@ const configPath = path.join(__dirname, argv.c || './config.json');
 console.log(chalk.green('config文件地址：') + chalk.blue.underline(configPath));
 const configStr = fs.readFileSync(configPath).toString("utf-8");
 const config = JSON.parse(configStr);
-setTokenAndUrl(config.SERVER_URL, config.token);
+setTokenAndUrl(config.SERVER_URL, config.TOKEN);
 
-const PATHS = getPaths('./musics');
+const PATHS = getPaths(config.MUSIC_PATH);
 const { MUSIC_DIR, errorLogPath, successLogPath } = PATHS;
 console.log(chalk.green('音乐文件夹地址：') + chalk.blue.underline(MUSIC_DIR));
 const spinner = ora(chalk.blue('=======扫描音频文件中=======')).start();
@@ -35,7 +35,6 @@ console.time("知了音乐上传脚本");
 const files = [];
 walkSync(MUSIC_DIR, (filePath) => {
     if (EXT_NAMES.includes(path.extname(filePath))) {
-        spinner.text = filePath;
         files.push(filePath);
     }
 });
@@ -184,11 +183,12 @@ const main = async () => {
         }
     };
 
-    await requestPool({ data: files, iteratee: processTask });
+    await requestPool({ data: files, iteratee: processTask, maxLimit : 20 });
 
     spinner.text = chalk.green(`上传完毕，成功${successObj.length}首,失败${errObj.length}首！`);
     spinner.succeed();
     console.timeEnd("知了音乐上传脚本");
+    console.log(errObj);
 };
 
 main();
