@@ -1,3 +1,4 @@
 package-lock.json
 cicada_add_music/musics
 node_modules
+*.log

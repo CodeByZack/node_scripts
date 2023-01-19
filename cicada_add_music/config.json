@@ -1,0 +1,5 @@
+{
+    "SERVER_URL" : "http://10.168.1.100:8000",
+    "MUSIC_PATH" : "./musics",
+    "TOKEN" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxIiwiaWF0IjoxNjc0MDM0NTY1LCJleHAiOjE2ODk1ODY1NjV9.hG_W8GJ_GnmlbUhYBVVCWkKfAxGr2LKjzi0ZtJWJiF4"
+}
